@@ -1,20 +1,29 @@
-import React from 'react';
-// Importamos el logo por defecto de React que ya viene en tus assets
-import logo from '../assets/react.svg'; 
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { useFavorites } from "../context/FavoritesContext";
 
 export default function Header() {
-  const appName = "SantiDev Project"; // Variable dinámica en JSX
+  const appName = "SantiDev Project";
+  const { favorites } = useFavorites();
 
   return (
     <header className="main-header">
       <div className="header-container">
-        {/* Uso correcto de className y variables dinámicas */}
-        <img src={logo} alt="Logo de React" className="header-logo" />
         <h1 className="header-title">{appName}</h1>
       </div>
+
       <nav className="header-nav">
-        <button className="nav-btn">Inicio</button>
-        <button className="nav-btn">Proyectos</button>
+        <NavLink to="/" className="nav-btn">
+          Inicio
+        </NavLink>
+
+        <NavLink to="/catalogo" className="nav-btn">
+          Catálogo
+        </NavLink>
+
+        <NavLink to="/favoritos" className="nav-btn">
+          Favoritos ({favorites.length})
+        </NavLink>
       </nav>
     </header>
   );
